@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "preinstall": "npm i -g pm2",
+    "dev": "cross-env DEBUG=* nodemon ./bin/www",
+    "start": "pm2 start ./bin/www --name meituan-hongbao --instances 2",
+    "reload": "pm2 reload meituan-hongbao",
+    "test": "node test/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "crypto-js": "^3.1.9-1",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.3",
+    "nodemon": "^1.14.12"
+  }
+}

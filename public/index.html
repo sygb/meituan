@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>美团 · 一键领取手气最佳红包</title>
+  <link rel="shortcut icon" href="/icon.png">
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-width: 375px;
+    }
+
+    .panel {
+      width: 375px;
+      margin: 15px auto;
+    }
+
+    .breadcrumb {
+      margin-bottom: 0;
+    }
+
+    #submit {
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .breadcrumb {
+      margin-bottom: 10px;
+    }
+
+    .modal-dialog {
+      width: 320px;
+      margin: 15px auto;
+    }
+
+    @media screen and (max-width: 480px) {
+      .panel {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="panel panel-default">
+    <div class="panel-heading">美团 · 一键领取手气最佳红包</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="mobile">要领取最佳红包的手机号码</label>
+        <input type="mobile" class="form-control" id="mobile" placeholder="11位手机号码" maxlength="11">
+      </div>
+      <div class="form-group">
+        <label for="url">美团分享出来的红包链接</label>
+        <input type="text" class="form-control" id="url" placeholder="https://activity.waimai.meituan.com/开头的链接">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" id="submit">马上领取</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script>
+    $('#submit').on('click', function (e) {
+      var $submit = $(this)
+      $submit.text('正在领取...').prop('disabled', true)
+      $.post('/hongbao', {
+          url: $.trim($('#url').val()),
+          mobile: $.trim($('#mobile').val())
+        })
+        .always(function () {
+          $submit.text('马上领取').prop('disabled', false)
+        })
+        .done(function (res) {
+          alert(res.message)
+        })
+        .fail(function (err) {
+          alert('服务器繁忙，请稍后重试')
+        })
+      localStorage.setItem('mobile', $('#mobile').val())
+    })
+
+    $('#mobile').val($.trim(localStorage.getItem('mobile')))
+
+  </script>
+</body>
+
+</html>
