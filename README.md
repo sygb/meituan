@@ -2,7 +2,7 @@
 
 [![GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 
-一键领取美团手气最佳红包
+**一键领取美团手气最佳红包**
 
 由于美团的红包领取次数是跟着微信账号走的，无法像饿了么红包那样无限领取
 
@@ -46,3 +46,7 @@ npm run dev
 npm start # 首次
 npm run reload # 更新
 ```
+
+## 运行效果
+
+[![screenshots](.github/screenshots.gif)](.github/screenshots.gif)
